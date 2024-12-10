@@ -2,6 +2,8 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from "vscode";
 
+const EXT_NAME = "typewriter";
+
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
@@ -14,12 +16,12 @@ export function activate(context: vscode.ExtensionContext) {
 
   // Add command to set delay
   let setDelayDisposable = vscode.commands.registerCommand(
-    "typewriter-paste.setDelay",
+    `${EXT_NAME}.setDelay`,
     async () => {
       const result = await vscode.window.showInputBox({
         prompt: "Enter delay in milliseconds (minimum 1ms)",
         value: String(
-          vscode.workspace.getConfiguration("typewriter-paste").get("delay", 50)
+          vscode.workspace.getConfiguration(EXT_NAME).get("delay", 50)
         ),
         validateInput: (value) => {
           const num = parseInt(value);
@@ -31,7 +33,7 @@ export function activate(context: vscode.ExtensionContext) {
 
       if (result) {
         await vscode.workspace
-          .getConfiguration("typewriter-paste")
+          .getConfiguration(EXT_NAME)
           .update("delay", parseInt(result), vscode.ConfigurationTarget.Global);
       }
     }
@@ -39,14 +41,14 @@ export function activate(context: vscode.ExtensionContext) {
 
   // Override the default paste command
   let pasteDisposable = vscode.commands.registerTextEditorCommand(
-    "typewriter-paste.paste",
+    `${EXT_NAME}.paste`,
     async (editor) => {
       const clipboard = await vscode.env.clipboard.readText();
       if (!clipboard) return;
 
       // Get delay from configuration
       const delay = vscode.workspace
-        .getConfiguration("typewriter-paste")
+        .getConfiguration(EXT_NAME)
         .get("delay", 50);
       const position = editor.selection.active;
 

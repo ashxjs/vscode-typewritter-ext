@@ -14,18 +14,18 @@
   "contributes": {
     "commands": [
       {
-        "command": "typewriter-paste.paste",
+        "command": "typewriter.paste",
         "title": "Typewriter: Paste"
       },
       {
-        "command": "typewriter-paste.setDelay",
+        "command": "typewriter.setDelay",
         "title": "Typewriter: Set Delay between each characters (default 50ms)"
       }
     ],
     "configuration": {
       "title": "Typewriter Paste",
       "properties": {
-        "typewriter-paste.delay": {
+        "typewriter.delay": {
           "type": "number",
           "default": 50,
           "minimum": 1,
@@ -36,8 +36,8 @@
   },
   "scripts": {
     "vscode:prepublish": "yarn run package",
-    "compile": "webpack",
-    "watch": "webpack --watch",
+    "compile": "webpack --mode development",
+    "watch": "webpack --mode development --watch",
     "package": "webpack --mode production --devtool hidden-source-map",
     "compile-tests": "tsc -p . --outDir out",
     "watch-tests": "tsc -p . -w --outDir out",
