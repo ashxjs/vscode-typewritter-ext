@@ -9,8 +9,8 @@ And use the "Typewriter: Paste" command !
 That's it ! Enjoy 🕹️👋
 
 <center>
-    <img src="./images/paste.gif" alt="paste feature" height="200" />
-    <img src="./images/delay.gif" alt="delay feature" height="200" />
+    <img src="https://github.com/ashxjs/vscode-typewritter-ext/blob/main/images/delay.gif?raw=true" alt="paste feature" height="200" />
+    <img src="https://github.com/ashxjs/vscode-typewritter-ext/blob/main/images/delay.gif?raw=true" alt="delay feature" height="200" />
 </center>
 
 ## Requirements
