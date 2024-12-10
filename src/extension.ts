@@ -12,6 +12,31 @@ export function activate(context: vscode.ExtensionContext) {
   statusBarItem.text = "Typewriter: ON";
   statusBarItem.show();
 
+  // Add command to set delay
+  let setDelayDisposable = vscode.commands.registerCommand(
+    "typewriter-paste.setDelay",
+    async () => {
+      const result = await vscode.window.showInputBox({
+        prompt: "Enter delay in milliseconds (minimum 1ms)",
+        value: String(
+          vscode.workspace.getConfiguration("typewriter-paste").get("delay", 50)
+        ),
+        validateInput: (value) => {
+          const num = parseInt(value);
+          return !isNaN(num) && num >= 1
+            ? null
+            : "Please enter a valid number >= 1";
+        },
+      });
+
+      if (result) {
+        await vscode.workspace
+          .getConfiguration("typewriter-paste")
+          .update("delay", parseInt(result), vscode.ConfigurationTarget.Global);
+      }
+    }
+  );
+
   // Override the default paste command
   let pasteDisposable = vscode.commands.registerTextEditorCommand(
     "typewriter-paste.paste",
@@ -19,16 +44,17 @@ export function activate(context: vscode.ExtensionContext) {
       const clipboard = await vscode.env.clipboard.readText();
       if (!clipboard) return;
 
-      // Get current cursor position
+      // Get delay from configuration
+      const delay = vscode.workspace
+        .getConfiguration("typewriter-paste")
+        .get("delay", 50);
       const position = editor.selection.active;
 
-      // Type each character with delay
       let currentPos = position;
       for (const char of clipboard) {
-        await new Promise((resolve) => setTimeout(resolve, 50)); // 50ms delay
+        await new Promise((resolve) => setTimeout(resolve, delay));
         await editor.edit((editBuilder) => {
           if (char === "\n") {
-            // For line breaks, move to the start of the next line
             currentPos = new vscode.Position(currentPos.line + 1, 0);
             editBuilder.insert(currentPos.translate(1, 0), char);
           } else {
@@ -40,7 +66,11 @@ export function activate(context: vscode.ExtensionContext) {
     }
   );
 
-  context.subscriptions.push(pasteDisposable, statusBarItem);
+  context.subscriptions.push(
+    pasteDisposable,
+    setDelayDisposable,
+    statusBarItem
+  );
 }
 
 // This method is called when your extension is deactivated

@@ -21,7 +21,18 @@
         "command": "typewriter-paste.setDelay",
         "title": "Typewriter: Set Delay between each characters (default 50ms)"
       }
-    ]
+    ],
+    "configuration": {
+      "title": "Typewriter Paste",
+      "properties": {
+        "typewriter-paste.delay": {
+          "type": "number",
+          "default": 50,
+          "minimum": 1,
+          "description": "Delay between each character (in milliseconds)"
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "yarn run package",
