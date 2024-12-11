@@ -2,7 +2,7 @@
   "name": "ashxjs-typewriter",
   "displayName": "Typewriter official extension",
   "description": "Typewriter is a tool that help you, it write code or text. Guess if you are recording a video about you writing or explaining portions of code.",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "license": "MIT",
   "publisher": "ashxjs-typewriter",
   "engines": {
