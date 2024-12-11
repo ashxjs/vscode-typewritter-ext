@@ -27,7 +27,7 @@ No requirements needed.
 
 <!-- Users appreciate release notes as you update your extension. -->
 
-### 0.0.2
+### 0.0.2 => 0.0.3
 
 Add compatibility with VSCode 1.93.1 for Cursor users
 
