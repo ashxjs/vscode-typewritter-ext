@@ -27,6 +27,10 @@ No requirements needed.
 
 <!-- Users appreciate release notes as you update your extension. -->
 
+### 0.0.2
+
+Add compatibility with VSCode 1.93.1 for Cursor users
+
 ### 1.0.0
 
 Initial release of the extension Typewriter
